@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Vehicles</div>
+  <div class="panel-body">
+    <a href="/vehicles/new" class="btn btn-primary">New Vehicle</a>    
+  </div>
+  <div class="well">
+    <div class="form-group">
+      <label for="make">Make</label>
+      <select name="make" id="make" [(ngModel)]="filter.makeId" (change)="OnMakeChange()" class="form-control">
+        <option value=""></option>
+        <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" (click)="ResetFilter()">Reset</button>
+  </div>
+  <!-- Table -->
+  <table class="table">    
+    <tr>      
+      <th *ngFor="let col of allColumns">
+        <div *ngIf="col.isSortable" (click)="OnSortingChange(col.sortBy)">
+            {{ col.title }}
+          <i *ngIf="filter.sortBy===col.sortBy" class="fa" 
+          [class.fa-sort-asc]="filter.isSortAscending"
+          [class.fa-sort-desc]="!filter.isSortAscending"></i>
+         </div>
+         <div *ngIf="!col.isSortable">{{ col.title }}</div>
+      </th>
+    </tr>
+    <tr *ngFor="let vehicle of vehicles">
+      <td>{{ vehicle.id }}</td>
+      <td>{{ vehicle.make.name }}</td>
+      <td>{{ vehicle.model.name }}</td>
+      <td>{{ vehicle.contact.name }}</td>
+      <td>
+        <a href="/vehicles/{{ vehicle.id }}" class="btn btn-default">View</a>
+      </td>
+    </tr>
+  </table>
+</div>
