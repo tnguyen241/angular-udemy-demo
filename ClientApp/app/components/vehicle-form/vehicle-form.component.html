@@ -1,3 +1,4 @@
+<h1>Vehicle Form Component</h1>
 <ng-container *ngIf="vehicle.id;then Vehicle;else NewVehicle"></ng-container>
 <ng-template #Vehicle><h1>Vehicle {{ vehicle.id }}</h1></ng-template>
 <ng-template #NewVehicle><h1>New Vehicle</h1></ng-template>
